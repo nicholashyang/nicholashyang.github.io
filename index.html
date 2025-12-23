@@ -1,139 +1,21 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hao Yang - Biography</title>
+    <title>{{ site.title }} - Biography</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Merriweather:wght@300;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* 基础设置 */
-        body {
-            font-family: 'Roboto', sans-serif; /* 正文使用无衬线字体 */
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 20px;
-        }
-
-        /* 容器样式：模仿纸张效果 */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 40px 60px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-radius: 8px;
-        }
-
-        /* 标题样式 */
-        h1 {
-            font-family: 'Merriweather', serif; /* 标题使用衬线字体 */
-            font-size: 2.5em;
-            color: #2c3e50;
-            border-bottom: 2px solid #eaeaea;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-family: 'Merriweather', serif;
-            color: #2980b9; /* 学术蓝 */
-            margin-top: 40px;
-            margin-bottom: 20px;
-            border-left: 5px solid #2980b9;
-            padding-left: 15px;
-        }
-
-        h3 {
-            font-size: 1.1em;
-            margin-bottom: 5px;
-            color: #34495e;
-        }
-
-        /* 链接样式 */
-        a {
-            color: #2980b9;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        a:hover {
-            color: #e74c3c;
-            text-decoration: underline;
-        }
-
-        /* 列表样式 */
-        ul {
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 8px;
-        }
-
-        /* 经历条目样式 (Education, Projects, etc.) */
-        .entry {
-            margin-bottom: 25px;
-        }
-        
-        .entry-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-        }
-
-        .entry-title {
-            font-weight: 700;
-            font-size: 1.05em;
-        }
-
-        .entry-date {
-            font-family: monospace;
-            color: #7f8c8d;
-            font-size: 0.9em;
-        }
-
-        /* 详细信息块 (对应 Markdown 里的 > ) */
-        .details {
-            margin-top: 5px;
-            margin-left: 0;
-            padding-left: 15px;
-            border-left: 3px solid #e0e0e0;
-            color: #666;
-            font-size: 0.95em;
-            font-style: italic;
-        }
-        
-        .details p {
-            margin: 2px 0;
-        }
-
-        /* 分割线 */
-        hr {
-            border: 0;
-            height: 1px;
-            background: #eee;
-            margin: 40px 0;
-        }
-        
-        /* 针对移动端的微调 */
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            .entry-header {
-                flex-direction: column;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
 <div class="container">
 
     <section id="biography">
-        <h1>Hao Yang</h1>
+        <h1>{{ site.title }}</h1>
         <p>
             This is Hao Yang, a PhD student in high energy physics. I have broad research interests spanning physics, mathematics, and computer science. My current research focus on Multiple-Parton Interactions (MPIs).
         </p>
@@ -142,88 +24,39 @@
     <section id="research-interests">
         <h2>Research Interests</h2>
         <ul>
-            <li>Hadron Physics: quantum chromodynamics, exotic hadron</li>
-            <li>Geometric and topological structures in physics</li>
-            <li>Machine learning in high energy physics</li>
-            <li>Stochastic process, information geometry</li>
+            {% for interest in site.data.interests %}
+            <li>{{ interest }}</li>
+            {% endfor %}
         </ul>
     </section>
 
     <section id="education">
         <h2>Education</h2>
-
+        {% for edu in site.data.education %}
         <div class="entry">
             <div class="entry-header">
-                <span class="entry-title">Ph.D. in Physics</span>
-                <span class="entry-date">2024/03 - now</span>
+                <span class="entry-title">{{ edu.degree }}</span>
+                <span class="entry-date">{{ edu.time }}</span>
             </div>
-            <div>Institute: University of Liverpool/Xi'an Jiaotong-Liverpool University</div>
-            <div>Location: Suzhou, China</div>
+            <div>Institute: {{ edu.institute }}</div>
+            <div>Location: {{ edu.location }}</div>
+            {% if edu.details %}
             <div class="details">
-                <p>Primary Supervisor: Andrew Fowlie, Arthur Moraes</p>
-                <p>Secondary Supervisor: Jan Kretzschmar</p>
-                <p>Third Supervisor: Mattheus Bartholomeus Nicolaas Kouwenhoven</p>
+                {% for detail in edu.details %}
+                <p>{{ detail }}</p>
+                {% endfor %}
             </div>
+            {% endif %}
         </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">Master of Science in Quantum Fields and Fundamental Forces (Distinction)</span>
-                <span class="entry-date">2022/10 - 2023/10</span>
-            </div>
-            <div>Institute: Imperial College London</div>
-            <div>Location: London, United Kingdom</div>
-            <div class="details">
-                <p>Dissertation: <i>Holographic Entanglement Entropy: A way to Information Paradox</i></p>
-                <p>Dissertation Supervisor: Jerome Gauntlett</p>
-                <p>Supervisor: Carlo R. Contaldi</p>
-            </div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">Bachelor of Science with Honours in Mathematics (Class I)</span>
-                <span class="entry-date">2020/09 - 2022/06</span>
-            </div>
-            <div>Institute: University of Liverpool</div>
-            <div>Location: Liverpool, United Kingdom</div>
-            <div class="details">
-                <p>Supervisor: Thomas Teubner</p>
-            </div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">Bachelor of Science in Applied Mathematics</span>
-                <span class="entry-date">2018/09 - 2020/06</span>
-            </div>
-            <div>Institute: Xi'an Jiaotong-Liverpool University</div>
-            <div>Location: Suzhou, China</div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">Secondary Education</span>
-                <span class="entry-date">2012 - 2018</span>
-            </div>
-            <div>Institute: Chengdu Experimental Foreign Languages School West Campus</div>
-            <div>Location: Chengdu, China</div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">Primary Education</span>
-                <span class="entry-date">2006 - 2012</span>
-            </div>
-            <div>Institute: Primary School Attached to Chengdu Foreign Languages School</div>
-            <div>Location: Chengdu, China</div>
-        </div>
+        {% endfor %}
     </section>
 
     <section id="positions">
         <h2>Positions</h2>
         <ul>
-            <li><strong>2024-2025:</strong> Student-Staff Liaison Committee student representative</li>
+            {% for pos in site.data.positions %}
+            <li><strong>{{ pos.time }}:</strong> {{ pos.role }}</li>
+            {% endfor %}
         </ul>
     </section>
 
@@ -232,15 +65,9 @@
     <section id="awards">
         <h2>Awards and Honors</h2>
         <ul>
-            <li><strong>2024-2027:</strong> Postgraduate Research Scholarship - XJTLU</li>
-            <li><strong>2022:</strong> Fröhlich Prize in Theoretical Physics</li>
-            <li><strong>2022:</strong> Institute of Mathematics and its Applications (IMA) Prize</li>
-            <li><strong>2020:</strong> Mathematical Contest in Modeling - Successful Participant</li>
-            <li><strong>2019:</strong> The University Physics Competition - Bronze Medal Winners</li>
-            <li><strong>2019:</strong> Contemporary Undergraduate Mathematical Contest in Modeling - Class II</li>
-            <li><strong>2017:</strong> Chinese Chemistry Olympiad - Preliminary round Class II</li>
-            <li><strong>2017:</strong> Chinese Physics Olympiad Final round Class II</li>
-            <li><strong>2012-2018:</strong> High School Scholarship (Class I)</li>
+            {% for award in site.data.awards %}
+            <li><strong>{{ award.time }}:</strong> {{ award.name }}</li>
+            {% endfor %}
         </ul>
     </section>
 
@@ -248,107 +75,36 @@
 
     <section id="projects">
         <h2>Projects</h2>
-        
+        {% for project in site.data.projects %}
         <div class="entry">
             <div class="entry-header">
-                <span class="entry-title">Multiple-Parton Interactions at the LHC</span>
-                <span class="entry-date">2024 - now</span>
+                <span class="entry-title">{{ project.title }}</span>
+                <span class="entry-date">{{ project.time }}</span>
             </div>
+            {% if project.details %}
             <div class="details">
-                <p>Supervisor: Arthur Moraes</p>
+                {% for detail in project.details %}
+                <p>{{ detail }}</p>
+                {% endfor %}
             </div>
+            {% endif %}
         </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">Quantum Riemannian Geometry and its Application to Black Holes</span>
-                <span class="entry-date">2024 - now</span>
-            </div>
-            <div class="details">
-                <p>Supervisor: Tomasz Brzezinski, Edwin Beggs</p>
-            </div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">Symplectic Geometry and Geometrical Quantization</span>
-                <span class="entry-date">2024 - now</span>
-            </div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">Analytical Study of Coherent States Representation in Quantum Mechanics</span>
-                <span class="entry-date">2022 Summer</span>
-            </div>
-            <div class="details">
-                <p>Undergraduate Research Fellowships Project</p>
-                <p>Institute: Xi'an Jiaotong-Liverpool University</p>
-                <p>Supervisor: Tiago Adorno</p>
-            </div>
-        </div>
+        {% endfor %}
     </section>
 
     <hr>
 
     <section id="activities">
         <h2>Activities</h2>
-        
+        {% for activity in site.data.activities %}
         <div class="entry">
             <div class="entry-header">
-                <span class="entry-title">Quarkonium Working Group Workshop (QWG 17)</span>
-                <span class="entry-date">2025/11/17 - 2025/11/21</span>
+                <span class="entry-title">{{ activity.name }}</span>
+                <span class="entry-date">{{ activity.time }}</span>
             </div>
-            <div class="details">CERN</div>
+            <div class="details">{{ activity.location }}</div>
         </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">12th Interactional Workshop on Charm Physics (CHARM 2025)</span>
-                <span class="entry-date">2025/05/12 - 2025/05/16</span>
-            </div>
-            <div class="details">Shanghai</div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">East Asian Workshop on Exotic Hadrons 2024</span>
-                <span class="entry-date">2024/12/08 - 2024/12/11</span>
-            </div>
-            <div class="details">Nanjing</div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">10th China LHC Physics Conference (CLHC2024)</span>
-                <span class="entry-date">2024/11/13 - 2024/11/17</span>
-            </div>
-            <div class="details">Qingdao</div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">The 4th China Lattice QCQ Workshop</span>
-                <span class="entry-date">2024/10/11 - 2024/10/15</span>
-            </div>
-            <div class="details">Changsha</div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">MCnet Summer School</span>
-                <span class="entry-date">2024/06/10 - 2024/06/14</span>
-            </div>
-            <div class="details">CERN</div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">DESY Summer Student Lecture Programme</span>
-                <span class="entry-date">2021/07/26 - 2021/08/20</span>
-            </div>
-            <div class="details">DESY</div>
-        </div>
+        {% endfor %}
     </section>
 
     <hr>
@@ -356,8 +112,9 @@
     <section id="memberships">
         <h2>Memberships</h2>
         <ul>
-            <li><strong>Nov 2022 - Nov 2023:</strong> Associate Member, London Mathematical Society</li>
-            <li><strong>Aug 2022 - Jan 2024:</strong> Associate Member, Institute of Mathematics and its Applications</li>
+            {% for member in site.data.memberships %}
+            <li><strong>{{ member.time }}:</strong> {{ member.title }}</li>
+            {% endfor %}
         </ul>
     </section>
 
@@ -366,11 +123,9 @@
     <section id="teaching">
         <h2>Teaching</h2>
         <ul>
-            <li><strong>2023/24 SEM2:</strong> Teaching Assistant, PHY001 Classical Physics for Engineers (XJTLU)</li>
-            <li><strong>2024/25 SEM1:</strong> Teaching Assistant, MTH206 Statistical Distribution Theory (XJTLU)</li>
-            <li><strong>2024/25 SEM1:</strong> Teaching Assistant, MTH315 Differential Geometry for Curves and Surfaces (XJTLU)</li>
-            <li><strong>2024/25 SEM2:</strong> Teaching Assistant, MTH008 Multivariable Calculus (Science and Engineering) (XJTLU)</li>
-            <li><strong>2025/26 SEM1:</strong> Teaching Assistant, MTH029 Calculus (Mathematical Sciences) (XJTLU)</li>
+            {% for teach in site.data.teaching %}
+            <li><strong>{{ teach.time }}:</strong> {{ teach.role }}, {{ teach.course }}</li>
+            {% endfor %}
         </ul>
     </section>
 
@@ -378,41 +133,20 @@
 
     <section id="talks">
         <h2>Talks</h2>
-        
+        {% for talk in site.data.talks %}
         <div class="entry">
             <div class="entry-header">
-                <span class="entry-title">A Historical Review of Hadron Physics: From nucleus to exotic hadrons</span>
-                <span class="entry-date">2025/05/27</span>
-            </div>
-            <div class="details">Physics Seminar, XJTLU</div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">Monte Carlo Simulations on Charmed-strange Tetraquarks</span>
-                <span class="entry-date">2025/05/15</span>
-            </div>
-            <div class="details">CHARM 2025, Shanghai</div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">The Effects of Multiple-Parton Interactions on the Production of Charged Particles and Pentaquarks</span>
-                <span class="entry-date">2024/11/15</span>
+                <span class="entry-title">{{ talk.title }}</span>
+                <span class="entry-date">{{ talk.date }}</span>
             </div>
             <div class="details">
-                <p>CLHCP2024, Qingdao</p>
-                <p><a href="https://indico.ihep.ac.cn/event/22941/contributions/171434/" target="_blank">View on Indico of IHEP</a></p>
+                <p>{{ talk.venue }}</p>
+                {% if talk.link %}
+                <p><a href="{{ talk.link }}" target="_blank">{{ talk.link_text }}</a></p>
+                {% endif %}
             </div>
         </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <span class="entry-title">What is the exponential of the first-ordered differential operator and its applications</span>
-                <span class="entry-date">2024/06/25</span>
-            </div>
-            <div class="details">Student Seminar, XJTLU</div>
-        </div>
+        {% endfor %}
     </section>
 
     <hr>
@@ -422,11 +156,12 @@
         <p><i>Work in progress...</i></p>
     </section>
 
-    <footer style="text-align: center; margin-top: 50px; color: #999; font-size: 0.8em;">
-        <p>&copy; 2025 Hao Yang. Powered by GitHub Pages.</p>
+    <footer>
+        <p style="text-align: center; color: #999; margin-top: 50px; font-size: 0.8em;">
+            &copy; {{ "now" | date: "%Y" }} {{ site.title }}. Powered by GitHub Pages.
+        </p>
     </footer>
 
 </div>
-
 </body>
 </html>
