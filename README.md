@@ -1,13 +1,57 @@
 # Hao Yang's Homepage
 
-This is the source for `nicholashyang.github.io`, built with GitHub Pages and Jekyll.
+Source for `nicholashyang.github.io`, built with GitHub Pages and Jekyll.
 
-## Structure
+The homepage is intentionally data-driven: most content changes should happen in YAML files, not in the HTML template.
 
-- `index.html`: Jekyll/Liquid homepage template
-- `assets/css/style.css`: page styling
-- `_data/*.yml`: education, activities, awards, teaching, and talks data
-- `script.js`: mobile navigation and active-section highlighting
+## Edit Content
+
+- `_data/profile.yml`: name, role, summary, email, location, avatar initials, and profile links
+- `_data/modules.yml`: homepage modules, module order, module visibility, and module items
+- `assets/css/style.css`: visual design
+- `_includes/module.html`: shared renderer for module types
+- `index.html`: page shell; usually you should not need to edit it
+
+## Add, Remove, Or Reorder Modules
+
+Open `_data/modules.yml`.
+
+To hide a module:
+
+```yaml
+enabled: false
+```
+
+To remove a module, delete its whole block from `_data/modules.yml`.
+
+To reorder modules, move the whole block up or down in `_data/modules.yml`.
+
+To add a module, copy an existing block and change:
+
+```yaml
+- id: new-section
+  title: New Section
+  nav: true
+  enabled: true
+  type: cards
+  intro: Short section description.
+  items:
+    - title: Example item
+      date: 2026
+      meta: Optional metadata
+      summary: Optional one-sentence summary
+      links:
+        - label: Link
+          url: https://example.com
+```
+
+Supported module `type` values:
+
+- `prose`: paragraphs in `body`
+- `timeline`: dated entries in `items`
+- `cards`: card-style entries in `items`
+- `compact`: compact award/list entries in `items`
+- `contact`: contact callout with `links`
 
 ## Local Preview
 
@@ -23,4 +67,4 @@ For a quick static layout check without Liquid rendering:
 python3 -m http.server 8000
 ```
 
-GitHub Pages will render the Liquid template from the `main` branch.
+GitHub Pages renders the Liquid template from the `main` branch.

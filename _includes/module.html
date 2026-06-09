@@ -1,0 +1,94 @@
+{% assign module = include.module %}
+{% assign number = include.number %}
+<section class="module module-{{ module.type }}" id="{{ module.id }}" aria-labelledby="{{ module.id }}-title">
+  <div class="module-heading">
+    <p>{{ number | prepend: '0' | slice: -2, 2 }}</p>
+    <h2 id="{{ module.id }}-title">{{ module.title }}</h2>
+    {% if module.intro %}
+    <span>{{ module.intro }}</span>
+    {% endif %}
+  </div>
+
+  <div class="module-content">
+    {% case module.type %}
+    {% when 'prose' %}
+      <div class="prose">
+        {% for paragraph in module.body %}
+        <p>{{ paragraph }}</p>
+        {% endfor %}
+      </div>
+
+    {% when 'timeline' %}
+      <div class="timeline">
+        {% for item in module.items %}
+        <article class="timeline-item">
+          <div>
+            {% if item.date %}<span class="period">{{ item.date }}</span>{% endif %}
+            <h3>{{ item.title }}</h3>
+          </div>
+          {% if item.meta or item.location %}
+          <p>
+            {{ item.meta }}{% if item.meta and item.location %} · {% endif %}{{ item.location }}
+          </p>
+          {% endif %}
+          {% if item.details %}
+          <ul class="detail-list">
+            {% for detail in item.details %}
+            <li>{{ detail }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </article>
+        {% endfor %}
+      </div>
+
+    {% when 'cards' %}
+      {% if module.items.size > 0 %}
+      <div class="item-list">
+        {% for item in module.items %}
+        <article class="paper-card">
+          {% if item.date or item.meta %}
+          <p class="meta">{{ item.date }}{% if item.date and item.meta %} · {% endif %}{{ item.meta }}</p>
+          {% endif %}
+          <h3>{{ item.title }}</h3>
+          {% if item.location %}<p>{{ item.location }}</p>{% endif %}
+          {% if item.summary %}<p>{{ item.summary }}</p>{% endif %}
+          {% if item.links %}
+          <div class="item-actions">
+            {% for link in item.links %}
+            <a href="{{ link.url }}" target="_blank" rel="noreferrer">{{ link.label }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </article>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="prose">
+        <p><em>{{ module.empty | default: 'More soon.' }}</em></p>
+      </div>
+      {% endif %}
+
+    {% when 'compact' %}
+      <div class="compact-list">
+        {% for item in module.items %}
+        <article class="compact-item">
+          {% if item.date %}<span>{{ item.date }}</span>{% endif %}
+          <strong>{{ item.title }}</strong>
+          {% if item.summary %}<p>{{ item.summary }}</p>{% endif %}
+        </article>
+        {% endfor %}
+      </div>
+
+    {% when 'contact' %}
+      <div class="contact-card">
+        <h3>{{ module.intro }}</h3>
+        <div class="contact-links">
+          {% for link in module.links %}
+          <a href="{{ link.url }}" {% unless link.url contains 'mailto:' or link.url contains '#' %}target="_blank" rel="noreferrer"{% endunless %}>{{ link.label }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endcase %}
+  </div>
+</section>

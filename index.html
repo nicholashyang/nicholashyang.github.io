@@ -1,6 +1,8 @@
 ---
 layout: null
 ---
+{% assign profile = site.data.profile %}
+{% assign enabled_modules = site.data.modules | where: "enabled", true %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -25,37 +27,32 @@ layout: null
     <div class="site-shell">
       <aside class="profile-panel" aria-label="Profile">
         <div class="profile-card">
-          <div class="avatar" aria-hidden="true"></div>
-          <p class="name">Hao Yang</p>
-          <p class="role">PhD Student in High Energy Physics</p>
-          <p class="summary">
-            I work on high energy physics with interests across physics, mathematics, and
-            computer science. My current research focuses on Multiple-Parton Interactions.
-          </p>
+          <div class="avatar" aria-hidden="true">
+            <span>{{ profile.avatar_initials }}</span>
+          </div>
+          <p class="name">{{ profile.name }}</p>
+          <p class="role">{{ profile.role }}</p>
+          <p class="summary">{{ profile.summary }}</p>
 
           <div class="profile-links" aria-label="Profile links">
-            <a href="mailto:hao@example.com">Email</a>
-            <a href="https://github.com/nicholashyang" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="https://scholar.google.com/" target="_blank" rel="noreferrer">Scholar</a>
-            <a href="#contact">CV</a>
+            {% for link in profile.links %}
+            <a href="{{ link.url }}" {% unless link.url contains 'mailto:' or link.url contains '#' %}target="_blank" rel="noreferrer"{% endunless %}>{{ link.label }}</a>
+            {% endfor %}
           </div>
         </div>
 
         <nav class="side-nav" aria-label="Page navigation">
-          <a href="#biography">Biography</a>
-          <a href="#education">Education</a>
-          <a href="#awards">Awards</a>
-          <a href="#activities">Activities</a>
-          <a href="#teaching">Teaching</a>
-          <a href="#talks">Talks</a>
-          <a href="#publications">Publications</a>
-          <a href="#contact">Contact</a>
+          {% for module in enabled_modules %}
+            {% if module.nav %}
+            <a href="#{{ module.id }}">{{ module.title }}</a>
+            {% endif %}
+          {% endfor %}
         </nav>
       </aside>
 
       <div class="content-panel">
         <header class="topbar">
-          <a class="brand" href="#top" aria-label="Back to top">Hao Yang</a>
+          <a class="brand" href="#top" aria-label="Back to top">{{ profile.name }}</a>
           <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav">
             <span></span>
             <span></span>
@@ -63,176 +60,38 @@ layout: null
             <span class="sr-only">Open navigation</span>
           </button>
           <nav class="top-nav" aria-label="Top navigation">
-            <a href="#biography">Bio</a>
-            <a href="#education">Education</a>
-            <a href="#talks">Talks</a>
-            <a href="#contact">Contact</a>
+            {% for module in enabled_modules limit: 4 %}
+              {% if module.nav %}
+              <a href="#{{ module.id }}">{{ module.title }}</a>
+              {% endif %}
+            {% endfor %}
           </nav>
         </header>
 
         <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
-          <a href="#biography">Biography</a>
-          <a href="#education">Education</a>
-          <a href="#awards">Awards</a>
-          <a href="#activities">Activities</a>
-          <a href="#teaching">Teaching</a>
-          <a href="#talks">Talks</a>
-          <a href="#publications">Publications</a>
-          <a href="#contact">Contact</a>
+          {% for module in enabled_modules %}
+            {% if module.nav %}
+            <a href="#{{ module.id }}">{{ module.title }}</a>
+            {% endif %}
+          {% endfor %}
         </nav>
 
         <main id="main">
-          <section class="hero section-band" id="top" aria-labelledby="intro-title">
+          <section class="hero" id="top" aria-labelledby="intro-title">
             <div class="hero-copy">
-              <h1 id="intro-title">Hi, I’m <span>Hao</span>.</h1>
-              <p>
-                This is Hao Yang, a PhD student in high energy physics. I have broad research
-                interests spanning physics, mathematics, and computer science.
-              </p>
+              <h1 id="intro-title">Hi, I’m <span>{{ profile.short_name }}</span>.</h1>
+              <p>{{ profile.summary }}</p>
               <div class="hero-links" aria-label="Primary links">
-                <a href="mailto:hao@example.com">hao@example.com</a>
-                <a href="https://github.com/nicholashyang" target="_blank" rel="noreferrer">GitHub</a>
-                <a href="https://scholar.google.com/" target="_blank" rel="noreferrer">Google Scholar</a>
+                {% for link in profile.links limit: 3 %}
+                <a href="{{ link.url }}" {% unless link.url contains 'mailto:' or link.url contains '#' %}target="_blank" rel="noreferrer"{% endunless %}>{{ link.label }}</a>
+                {% endfor %}
               </div>
             </div>
           </section>
 
-          <section class="section-band" id="biography" aria-labelledby="biography-title">
-            <div class="section-heading">
-              <p>01</p>
-              <h2 id="biography-title">Biography</h2>
-            </div>
-            <div class="section-body prose">
-              <p>
-                I am currently a PhD student in Physics at the University of Liverpool and
-                Xi'an Jiaotong-Liverpool University. My current research focuses on
-                Multiple-Parton Interactions (MPIs), with a broader interest in particle
-                physics, mathematical methods, and computational tools.
-              </p>
-              <p>
-                This homepage collects my education history, academic activities, teaching,
-                talks, and publications.
-              </p>
-            </div>
-          </section>
-
-          <section class="section-band" id="education" aria-labelledby="education-title">
-            <div class="section-heading">
-              <p>02</p>
-              <h2 id="education-title">Education</h2>
-            </div>
-            <div class="timeline">
-              {% for edu in site.data.education %}
-              <article class="timeline-item">
-                <div>
-                  <span class="period">{{ edu.time }}</span>
-                  <h3>{{ edu.degree }}</h3>
-                </div>
-                <p>{{ edu.institute }} · {{ edu.location }}</p>
-                {% if edu.details %}
-                <ul class="detail-list">
-                  {% for detail in edu.details %}
-                  <li>{{ detail }}</li>
-                  {% endfor %}
-                </ul>
-                {% endif %}
-              </article>
-              {% endfor %}
-            </div>
-          </section>
-
-          <section class="section-band" id="awards" aria-labelledby="awards-title">
-            <div class="section-heading">
-              <p>03</p>
-              <h2 id="awards-title">Awards</h2>
-            </div>
-            <div class="compact-list">
-              {% for award in site.data.awards %}
-              <article class="compact-item">
-                <span>{{ award.date }}</span>
-                <strong>{{ award.award }}</strong>
-              </article>
-              {% endfor %}
-            </div>
-          </section>
-
-          <section class="section-band" id="activities" aria-labelledby="activities-title">
-            <div class="section-heading">
-              <p>04</p>
-              <h2 id="activities-title">Activities</h2>
-            </div>
-            <div class="item-list">
-              {% for activity in site.data.activities %}
-              <article class="paper-card">
-                <p class="meta">{{ activity.time }}</p>
-                <h3>{{ activity.name }}</h3>
-                <p>{{ activity.location }}</p>
-                {% if activity.link %}
-                <div class="item-actions">
-                  <a href="{{ activity.link }}" target="_blank" rel="noreferrer">Event page</a>
-                </div>
-                {% endif %}
-              </article>
-              {% endfor %}
-            </div>
-          </section>
-
-          <section class="section-band" id="teaching" aria-labelledby="teaching-title">
-            <div class="section-heading">
-              <p>05</p>
-              <h2 id="teaching-title">Teaching</h2>
-            </div>
-            <div class="timeline">
-              {% for teach in site.data.teaching %}
-              <article class="timeline-item">
-                <div>
-                  <span class="period">{{ teach.date }}</span>
-                  <h3>{{ teach.module_name }}</h3>
-                </div>
-                <p>{{ teach.position }} · {{ teach.module_code }} · {{ teach.location }}</p>
-              </article>
-              {% endfor %}
-            </div>
-          </section>
-
-          <section class="section-band" id="talks" aria-labelledby="talks-title">
-            <div class="section-heading">
-              <p>06</p>
-              <h2 id="talks-title">Talks</h2>
-            </div>
-            <div class="item-list">
-              {% for talk in site.data.talks %}
-              <article class="paper-card">
-                <p class="meta">{{ talk.date }} · {{ talk.contribution }}</p>
-                <h3>{{ talk.title }}</h3>
-                <p>{{ talk.location }}</p>
-                {% if talk.link %}
-                <div class="item-actions">
-                  <a href="{{ talk.link }}" target="_blank" rel="noreferrer">Details</a>
-                </div>
-                {% endif %}
-              </article>
-              {% endfor %}
-            </div>
-          </section>
-
-          <section class="section-band" id="publications" aria-labelledby="publications-title">
-            <div class="section-heading">
-              <p>07</p>
-              <h2 id="publications-title">Publications</h2>
-            </div>
-            <div class="section-body prose">
-              <p><em>Work in progress.</em></p>
-            </div>
-          </section>
-
-          <section class="contact-section" id="contact" aria-labelledby="contact-title">
-            <div>
-              <p class="contact-label">Contact</p>
-              <h2 id="contact-title">I am happy to hear about research, seminars, and collaboration.</h2>
-            </div>
-            <a class="contact-button" href="mailto:hao@example.com">hao@example.com</a>
-          </section>
+          {% for module in enabled_modules %}
+            {% include module.html module=module number=forloop.index %}
+          {% endfor %}
         </main>
       </div>
     </div>

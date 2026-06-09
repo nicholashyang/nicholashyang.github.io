@@ -1,0 +1,171 @@
+- id: biography
+  title: Biography
+  nav: true
+  enabled: true
+  type: prose
+  intro: A concise overview for first-time visitors.
+  body:
+    - >-
+      I am currently a PhD student in Physics at the University of Liverpool and
+      Xi'an Jiaotong-Liverpool University. My current research focuses on
+      Multiple-Parton Interactions (MPIs), with a broader interest in particle
+      physics, mathematical methods, and computational tools.
+    - >-
+      This homepage collects my education history, academic activities,
+      teaching, talks, and publications.
+
+- id: education
+  title: Education
+  nav: true
+  enabled: true
+  type: timeline
+  intro: Academic training and supervision history.
+  items:
+    - title: Ph.D. in Physics
+      date: 2024/03 - now
+      meta: University of Liverpool / Xi'an Jiaotong-Liverpool University
+      location: Suzhou, China
+      details:
+        - "Primary Supervisor: Andrew Fowlie, Arthur Moraes"
+        - "Secondary Supervisor: Jan Kretzschmar"
+        - "Third Supervisor: Mattheus Bartholomeus Nicolaas Kouwenhoven"
+    - title: Master of Science in Quantum Fields and Fundamental Forces (Distinction)
+      date: 2022/10 - 2023/10
+      meta: Imperial College London
+      location: London, United Kingdom
+      details:
+        - "Dissertation: Holographic Entanglement Entropy: A way to Information Paradox"
+        - "Dissertation Supervisor: Jerome Gauntlett"
+        - "Supervisor: Carlo R. Contaldi"
+    - title: Bachelor of Science with Honours in Mathematics (Class I)
+      date: 2020/09 - 2022/06
+      meta: University of Liverpool
+      location: Liverpool, United Kingdom
+      details:
+        - "Supervisor: Thomas Teubner"
+    - title: Bachelor of Science in Applied Mathematics
+      date: 2018/09 - 2020/06
+      meta: Xi'an Jiaotong-Liverpool University
+      location: Suzhou, China
+
+- id: awards
+  title: Awards
+  nav: true
+  enabled: true
+  type: compact
+  intro: Selected awards and honors.
+  items:
+    - title: XJTLU Postgraduate Research Scholarship
+      date: 2024-2027
+    - title: Fröhlich Prize in Theoretical Physics
+      date: 2022
+    - title: Institute of Mathematics and its Applications (IMA) Prize
+      date: 2022
+    - title: Mathematical Contest in Modeling - Successful Participant
+      date: 2020
+    - title: The University Physics Competition - Bronze Medal Winners
+      date: 2019
+
+- id: activities
+  title: Activities
+  nav: true
+  enabled: true
+  type: cards
+  intro: Conferences, workshops, schools, and academic activities.
+  items:
+    - title: Quarkonium Working Group Workshop (QWG 17)
+      date: 2025/11/17 - 2025/11/21
+      meta: CERN
+    - title: 12th International Workshop on Charm Physics (CHARM 2025)
+      date: 2025/05/12 - 2025/05/16
+      meta: Shanghai, China
+    - title: East Asian Workshop on Exotic Hadrons 2024
+      date: 2024/12/08 - 2024/12/11
+      meta: Nanjing, China
+    - title: 10th China LHC Physics Conference (CLHC2024)
+      date: 2024/11/13 - 2024/11/17
+      meta: Qingdao, China
+    - title: MCnet Summer School
+      date: 2024/06/10 - 2024/06/14
+      meta: CERN
+
+- id: teaching
+  title: Teaching
+  nav: true
+  enabled: true
+  type: timeline
+  intro: Teaching assistant roles and course support.
+  items:
+    - title: Calculus (Mathematical Sciences)
+      date: 2025/26 SEM 1
+      meta: Teaching Assistant · MTH029
+      location: XJTLU
+    - title: Multivariable Calculus (Science and Engineering)
+      date: 2024/25 SEM 2
+      meta: Teaching Assistant · MTH008
+      location: XJTLU
+    - title: Differential Geometry for Curves and Surfaces
+      date: 2024/25 SEM 1
+      meta: Teaching Assistant · MTH315
+      location: XJTLU
+    - title: Statistical Distribution Theory
+      date: 2024/25 SEM 1
+      meta: Teaching Assistant · MTH206
+      location: XJTLU
+    - title: Classical Physics for Engineers
+      date: 2023/24 SEM 2
+      meta: Teaching Assistant · PHY001
+      location: XJTLU
+
+- id: talks
+  title: Talks
+  nav: true
+  enabled: true
+  type: cards
+  intro: Seminars and conference contributions.
+  items:
+    - title: A Historical Review of Hadron Physics
+      date: 2025-05-27
+      meta: Physics Seminar
+      location: XJTLU, Suzhou, China
+    - title: Monte Carlo Simulations on Charmed-Strange Tetraquarks
+      date: 2025-05-15
+      meta: CHARM 2025
+      location: Tsung-Dao Lee Institute, Shanghai, China
+      links:
+        - label: Details
+          url: https://indico-tdli.sjtu.edu.cn/event/2835/contributions/15424/
+    - title: The Effects of Multiple-Parton Interactions on the Production of Charged Particles and Pentaquarks
+      date: 2024-11-15
+      meta: CLHCP2024
+      location: Qingdao, China
+      links:
+        - label: Details
+          url: https://indico.ihep.ac.cn/event/22941/contributions/171434/
+    - title: What is the exponential of the first-ordered differential operator and its applications
+      date: 2024-06-25
+      meta: Physics Seminar
+      location: XJTLU, Suzhou, China
+
+- id: publications
+  title: Publications
+  nav: true
+  enabled: true
+  type: cards
+  intro: Papers, preprints, and selected manuscripts.
+  empty: Work in progress.
+  items: []
+
+- id: contact
+  title: Contact
+  nav: true
+  enabled: true
+  type: contact
+  intro: I am happy to hear about research, seminars, and collaboration.
+  links:
+    - label: Email
+      url: mailto:hao@example.com
+    - label: GitHub
+      url: https://github.com/nicholashyang
+    - label: Google Scholar
+      url: https://scholar.google.com/
