@@ -4,15 +4,15 @@ role: PhD Student in High Energy Physics
 summary: >-
   I work on high energy physics with interests across physics, mathematics, and
   computer science. My current research focuses on Multiple-Parton Interactions.
-email: hao@example.com
+email: hao.yang@liverpool.ac.uk
 location: Suzhou, China
 avatar_initials: HY
 links:
   - label: Email
-    url: mailto:hao@example.com
+    url: mailto:hao.yang@liverpool.ac.uk
   - label: GitHub
     url: https://github.com/nicholashyang
-  - label: Scholar
-    url: https://scholar.google.com/
+  - label: INSPIRE
+    url: https://inspirehep.net/authors/2849855
   - label: CV
     url: "#contact"
