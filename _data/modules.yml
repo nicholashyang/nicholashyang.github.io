@@ -91,7 +91,7 @@
   type: timeline
   intro: Teaching assistant roles and course support.
   items:
-    - title: Physics I: Mechanics
+    - title: "Physics I: Mechanics"
       date: 2025/26 SEM 2
       meta: Teaching Assistant · PHY005
       location: XJTLU
@@ -168,7 +168,7 @@
   intro: Papers, preprints, and selected manuscripts.
   empty: Work in progress.
   items:
-    - title: Holographic Entanglement Entropy: A way to Information Paradox
+    - title: "Holographic Entanglement Entropy: A way to Information Paradox"
     
 
 - id: contact
