@@ -120,7 +120,7 @@
   title: Positions
   nav: true
   enabled: true
-  type: cards
+  type: compact
   intro: Positions, memberships, etc.
   items:
   - title: Student-Staff Liaison Committee student representative
