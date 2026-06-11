@@ -3,16 +3,14 @@
   nav: true
   enabled: true
   type: prose
-  intro: A concise overview for first-time visitors.
+  intro: Not everything about me.
   body:
     - >-
-      I am currently a PhD student in Physics at the University of Liverpool and
+      This is Hao Yang. I am currently a PhD student in high-energy physics at the University of Liverpool and
       Xi'an Jiaotong-Liverpool University. My current research focuses on
-      Multiple-Parton Interactions (MPIs), with a broader interest in particle
-      physics, mathematical methods, and computational tools.
+      Multiple-Partonic Interactions (MPIs).
     - >-
-      This homepage collects my education history, academic activities,
-      teaching, talks, and publications.
+      
 
 - id: education
   title: Education
@@ -26,17 +24,14 @@
       meta: University of Liverpool / Xi'an Jiaotong-Liverpool University
       location: Suzhou, China
       details:
-        - "Primary Supervisor: Andrew Fowlie, Arthur Moraes"
-        - "Secondary Supervisor: Jan Kretzschmar"
-        - "Third Supervisor: Mattheus Bartholomeus Nicolaas Kouwenhoven"
+        - "Supervisor: Andrew Fowlie, Arthur Moraes, Jan Kretzschmar, Mattheus Bartholomeus Nicolaas Kouwenhoven"
     - title: Master of Science in Quantum Fields and Fundamental Forces (Distinction)
       date: 2022/10 - 2023/10
       meta: Imperial College London
       location: London, United Kingdom
       details:
         - "Dissertation: Holographic Entanglement Entropy: A way to Information Paradox"
-        - "Dissertation Supervisor: Jerome Gauntlett"
-        - "Supervisor: Carlo R. Contaldi"
+        - "Supervisor: Jerome Gauntlett, Carlo R. Contaldi"
     - title: Bachelor of Science with Honours in Mathematics (Class I)
       date: 2020/09 - 2022/06
       meta: University of Liverpool
@@ -53,7 +48,7 @@
   nav: true
   enabled: true
   type: compact
-  intro: Selected awards and honors.
+  intro: Selected awards and honours.
   items:
     - title: XJTLU Postgraduate Research Scholarship
       date: 2024-2027
@@ -96,6 +91,10 @@
   type: timeline
   intro: Teaching assistant roles and course support.
   items:
+    - title: Physics I: Mechanics
+      date: 2025/26 SEM 2
+      meta: Teaching Assistant · PHY005
+      location: XJTLU
     - title: Calculus (Mathematical Sciences)
       date: 2025/26 SEM 1
       meta: Teaching Assistant · MTH029
@@ -116,6 +115,20 @@
       date: 2023/24 SEM 2
       meta: Teaching Assistant · PHY001
       location: XJTLU
+
+- id: positions
+  title: Positions
+  nav: true
+  enabled: true
+  type: cards
+  intro: Positions, memberships, etc.
+  items:
+  - title: Student-Staff Liaison Committee student representative
+    date: 2024-2025
+  - title: Associate Member, London Mathematical Society
+    date: 2022-2023
+  - title: Associate Member, Institute of Mathematics and its Applications
+    date: 2022-2024
 
 - id: talks
   title: Talks
@@ -154,7 +167,9 @@
   type: cards
   intro: Papers, preprints, and selected manuscripts.
   empty: Work in progress.
-  items: []
+  items:
+    - title: Holographic Entanglement Entropy: A way to Information Paradox
+    
 
 - id: contact
   title: Contact
@@ -164,8 +179,8 @@
   intro: I am happy to hear about research, seminars, and collaboration.
   links:
     - label: Email
-      url: mailto:hao@example.com
+      url: mailto:hao.yang@liverpool.ac.uk
     - label: GitHub
       url: https://github.com/nicholashyang
-    - label: Google Scholar
-      url: https://scholar.google.com/
+    - label: INSPIRE
+      url: https://inspirehep.net/authors/2849855
