@@ -55,16 +55,20 @@ Supported module `type` values:
 
 ## Local Preview
 
-With Ruby/Jekyll installed:
+The repository root `index.html` is a Jekyll/Liquid template. Do not open it directly with `file://`; the browser cannot render `_data`, `_includes`, or Liquid tags.
+
+Without Ruby/Jekyll, generate a static local preview:
+
+```bash
+python3 tools/render_preview.py
+```
+
+Then open `_preview/index.html`.
+
+With Ruby/Jekyll installed, preview the real GitHub Pages render:
 
 ```bash
 bundle exec jekyll serve
-```
-
-For a quick static layout check without Liquid rendering:
-
-```bash
-python3 -m http.server 8000
 ```
 
 GitHub Pages renders the Liquid template from the `main` branch.
