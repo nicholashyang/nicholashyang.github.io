@@ -1,5 +1,9 @@
 {% assign module = include.module %}
 {% assign number = include.number %}
+{% assign module_items = module.items %}
+{% if module.source %}
+  {% assign module_items = site.data[module.source] %}
+{% endif %}
 <section class="module module-{{ module.type }}" id="{{ module.id }}" aria-labelledby="{{ module.id }}-title">
   <div class="module-heading">
     <p>{{ number | prepend: '0' | slice: -2, 2 }}</p>
@@ -20,7 +24,7 @@
 
     {% when 'timeline' %}
       <div class="timeline">
-        {% for item in module.items %}
+        {% for item in module_items %}
         <article class="timeline-item">
           <div>
             {% if item.date %}<span class="period">{{ item.date }}</span>{% endif %}
@@ -43,9 +47,9 @@
       </div>
 
     {% when 'cards' %}
-      {% if module.items.size > 0 %}
+      {% if module_items.size > 0 %}
       <div class="item-list">
-        {% for item in module.items %}
+        {% for item in module_items %}
         <article class="paper-card">
           {% if item.date or item.meta %}
           <p class="meta">{{ item.date }}{% if item.date and item.meta %} · {% endif %}{{ item.meta }}</p>
@@ -71,7 +75,7 @@
 
     {% when 'compact' %}
       <div class="compact-list">
-        {% for item in module.items %}
+        {% for item in module_items %}
         <article class="compact-item">
           {% if item.date %}<span>{{ item.date }}</span>{% endif %}
           <strong>{{ item.title }}</strong>

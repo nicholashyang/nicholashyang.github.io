@@ -166,6 +166,7 @@
   enabled: true
   type: cards
   intro: Papers, preprints, and selected manuscripts.
+  source: publications
   empty: Work in progress.
   items:
     - title: "Holographic Entanglement Entropy: A way to Information Paradox"

@@ -53,6 +53,23 @@ Supported module `type` values:
 - `compact`: compact award/list entries in `items`
 - `contact`: contact callout with `links`
 
+## Sync Publications From INSPIRE
+
+The Publications module reads `_data/publications.yml`.
+
+To refresh it locally from the INSPIRE author profile linked in `_data/profile.yml`:
+
+```bash
+python3 tools/fetch_inspire_publications.py
+```
+
+The repository also includes `.github/workflows/sync-publications.yml`, which can refresh publications automatically:
+
+- weekly on Monday at 03:17 UTC
+- manually from GitHub Actions via `workflow_dispatch`
+
+The sync script uses the INSPIRE literature API, not HTML scraping.
+
 ## Local Preview
 
 The repository root `index.html` is a Jekyll/Liquid template. Do not open it directly with `file://`; the browser cannot render `_data`, `_includes`, or Liquid tags.

@@ -36,9 +36,10 @@ def render_links(items: list[dict] | None) -> str:
     )
 
 
-def render_module(module: dict, number: int) -> str:
+def render_module(module: dict, number: int, data_sources: dict[str, list[dict]]) -> str:
     module_id = esc(module["id"])
     kind = module.get("type")
+    module_items = data_sources.get(module["source"], module.get("items", [])) if module.get("source") else module.get("items", [])
     heading = (
         f'<div class="module-heading"><p>{number:02d}</p>'
         f'<h2 id="{module_id}-title">{esc(module["title"])}</h2>'
@@ -52,7 +53,7 @@ def render_module(module: dict, number: int) -> str:
         ) + "</div>"
     elif kind == "timeline":
         items = []
-        for item in module.get("items", []):
+        for item in module_items:
             details = ""
             if item.get("details"):
                 details = '<ul class="detail-list">' + "".join(
@@ -69,9 +70,9 @@ def render_module(module: dict, number: int) -> str:
             )
         content = '<div class="timeline">' + "".join(items) + "</div>"
     elif kind == "cards":
-        if module.get("items"):
+        if module_items:
             cards = []
-            for item in module.get("items", []):
+            for item in module_items:
                 meta = ""
                 if item.get("date") or item.get("meta"):
                     joiner = " · " if item.get("date") and item.get("meta") else ""
@@ -99,7 +100,7 @@ def render_module(module: dict, number: int) -> str:
             + f'<strong>{esc(item.get("title"))}</strong>'
             + (f'<p>{esc(item.get("summary"))}</p>' if item.get("summary") else "")
             + "</article>"
-            for item in module.get("items", [])
+            for item in module_items
         ) + "</div>"
     elif kind == "contact":
         content = (
@@ -122,6 +123,11 @@ def main() -> None:
         for module in yaml.safe_load((ROOT / "_data/modules.yml").read_text())
         if module.get("enabled")
     ]
+    data_sources = {}
+    for path in (ROOT / "_data").glob("*.yml"):
+        if path.stem in {"modules", "profile"}:
+            continue
+        data_sources[path.stem] = yaml.safe_load(path.read_text()) or []
 
     shutil.rmtree(OUT, ignore_errors=True)
     (OUT / "assets/css").mkdir(parents=True)
@@ -133,7 +139,7 @@ def main() -> None:
         for module in modules
         if module.get("nav")
     )
-    module_html = "".join(render_module(module, index + 1) for index, module in enumerate(modules))
+    module_html = "".join(render_module(module, index + 1, data_sources) for index, module in enumerate(modules))
     profile_links = render_links(profile.get("links"))
     hero_links = render_links(profile.get("links", [])[:3])
 
