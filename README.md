@@ -6,11 +6,34 @@ The homepage is intentionally data-driven: most content changes should happen in
 
 ## Edit Content
 
-- `_data/profile.yml`: name, role, summary, email, location, avatar initials, and profile links
+- `_data/profile.yml`: name, role, summary, email, location, avatar, and profile links
 - `_data/modules.yml`: homepage modules, module order, module visibility, and module items
 - `assets/css/style.css`: visual design
 - `_includes/module.html`: shared renderer for module types
 - `index.html`: page shell; usually you should not need to edit it
+
+## Change The Avatar
+
+The avatar is configured in `_data/profile.yml`.
+
+By default the site shows initials:
+
+```yaml
+avatar_initials: HY
+avatar_image:
+```
+
+To use a real image:
+
+1. Add the image file to the repository, for example `assets/img/avatar.jpg`.
+2. Set `avatar_image` in `_data/profile.yml`:
+
+```yaml
+avatar_initials: HY
+avatar_image: /assets/img/avatar.jpg
+```
+
+The image will be cropped into a circle automatically. Keep `avatar_initials` as a fallback. Recommended image format: square JPG/PNG/WebP, at least `512 x 512`.
 
 ## Add, Remove, Or Reorder Modules
 

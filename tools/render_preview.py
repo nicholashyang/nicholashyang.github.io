@@ -134,14 +134,20 @@ def main() -> None:
     shutil.copy(ROOT / "assets/css/style.css", OUT / "assets/css/style.css")
     shutil.copy(ROOT / "script.js", OUT / "script.js")
 
-    nav = "".join(
-        f'<a href="#{esc(module["id"])}">{esc(module["title"])}</a>'
-        for module in modules
-        if module.get("nav")
-    )
+    nav_items = []
+    for module in (module for module in modules if module.get("nav")):
+        nav_items.append(
+            f'<a href="#{esc(module["id"])}">'
+            f'<span class="side-nav-label">{esc(module["title"])}</span>'
+            "</a>"
+        )
+    nav = "".join(nav_items)
     module_html = "".join(render_module(module, index + 1, data_sources) for index, module in enumerate(modules))
     profile_links = render_links(profile.get("links"))
-    hero_links = render_links(profile.get("links", [])[:3])
+    if profile.get("avatar_image"):
+        avatar_html = f'<img src="{esc(profile.get("avatar_image"))}" alt="">'
+    else:
+        avatar_html = f'<span>{esc(profile.get("avatar_initials"))}</span>'
 
     html_doc = f"""<!doctype html>
 <html lang="en">
@@ -167,7 +173,7 @@ def main() -> None:
     <div class="site-shell">
       <aside class="profile-panel" aria-label="Profile">
         <div class="profile-card">
-          <div class="avatar" aria-hidden="true"><span>{esc(profile.get("avatar_initials"))}</span></div>
+          <div class="avatar" aria-hidden="true">{avatar_html}</div>
           <p class="name">{esc(profile.get("name"))}</p>
           <p class="role">{esc(profile.get("role"))}</p>
           <p class="summary">{esc(profile.get("summary"))}</p>
@@ -177,11 +183,9 @@ def main() -> None:
       </aside>
       <div class="content-panel">
         <header class="topbar">
-          <a class="brand" href="#top" aria-label="Back to top">{esc(profile.get("name"))}</a>
           <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav">
             <span></span><span></span><span></span><span class="sr-only">Open navigation</span>
           </button>
-          <nav class="top-nav" aria-label="Top navigation">{nav}</nav>
           <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
             <span class="theme-icon theme-icon-moon" aria-hidden="true"></span>
             <span class="theme-icon theme-icon-sun" aria-hidden="true"></span>
@@ -193,7 +197,6 @@ def main() -> None:
             <div class="hero-copy">
               <h1 id="intro-title">Hi, I’m <span>{esc(profile.get("short_name"))}</span>.</h1>
               <p>{esc(profile.get("summary"))}</p>
-              <div class="hero-links" aria-label="Primary links">{hero_links}</div>
             </div>
           </section>
           {module_html}

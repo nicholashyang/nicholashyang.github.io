@@ -40,7 +40,11 @@ layout: null
       <aside class="profile-panel" aria-label="Profile">
         <div class="profile-card">
           <div class="avatar" aria-hidden="true">
+            {% if profile.avatar_image %}
+            <img src="{{ profile.avatar_image | relative_url }}" alt="">
+            {% else %}
             <span>{{ profile.avatar_initials }}</span>
+            {% endif %}
           </div>
           <p class="name">{{ profile.name }}</p>
           <p class="role">{{ profile.role }}</p>
@@ -56,7 +60,9 @@ layout: null
         <nav class="side-nav" aria-label="Page navigation">
           {% for module in enabled_modules %}
             {% if module.nav %}
-            <a href="#{{ module.id }}">{{ module.title }}</a>
+            <a href="#{{ module.id }}">
+              <span class="side-nav-label">{{ module.title }}</span>
+            </a>
             {% endif %}
           {% endfor %}
         </nav>
@@ -64,20 +70,12 @@ layout: null
 
       <div class="content-panel">
         <header class="topbar">
-          <a class="brand" href="#top" aria-label="Back to top">{{ profile.name }}</a>
           <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav">
             <span></span>
             <span></span>
             <span></span>
             <span class="sr-only">Open navigation</span>
           </button>
-          <nav class="top-nav" aria-label="Top navigation">
-            {% for module in enabled_modules limit: 4 %}
-              {% if module.nav %}
-              <a href="#{{ module.id }}">{{ module.title }}</a>
-              {% endif %}
-            {% endfor %}
-          </nav>
           <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
             <span class="theme-icon theme-icon-moon" aria-hidden="true"></span>
             <span class="theme-icon theme-icon-sun" aria-hidden="true"></span>
@@ -97,11 +95,6 @@ layout: null
             <div class="hero-copy">
               <h1 id="intro-title">Hi, I’m <span>{{ profile.short_name }}</span>.</h1>
               <p>{{ profile.summary }}</p>
-              <div class="hero-links" aria-label="Primary links">
-                {% for link in profile.links limit: 3 %}
-                <a href="{{ link.url }}" {% unless link.url contains 'mailto:' or link.url contains '#' %}target="_blank" rel="noreferrer"{% endunless %}>{{ link.label }}</a>
-                {% endfor %}
-              </div>
             </div>
           </section>
 
