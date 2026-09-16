@@ -1,7 +1,7 @@
 - id: biography
   title: Biography
   nav: true
-  enabled: true
+  enabled: false
   type: prose
   intro: Not everything about me.
   body:
