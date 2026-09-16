@@ -91,6 +91,14 @@
   type: timeline
   intro: Teaching assistant roles and course support.
   items:
+    - title: "Linear Algebra I"
+      date: 2026/27 SEM 1
+      meta: Teaching Assistant · MTH028
+      location: XJTLU
+    - title: "Python Programming for Physics"
+      date: 2026/27 SEM 1
+      meta: Teaching Assistant · PHY105
+      location: XJTLU
     - title: "Physics I: Mechanics"
       date: 2025/26 SEM 2
       meta: Teaching Assistant · PHY005
